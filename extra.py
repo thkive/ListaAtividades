@@ -1,45 +1,38 @@
-lista = []
+def doacao():
 
-def cadastro():
-    c = 0
-    idade = 0
+    print("------CAIXA DE DOAÇÃO DE ALIMENTOS------")
 
-    while c < 2:
-        c = c + 1
+    while True:
 
-        nome = input("Digite seu nome completo: ")
-        while not nome:
-            print("Erro: O nome completo nao pode esta vazio.")
-            nome = input("Digite seu nome completo: ").strip()
+        try:
+            valor_str = input("Digite quantos quilos(kg) deseja doar: ")
+            print("---------------------------------")
+        except ValueError:
+            print("Digite um valor valido.")
 
-        palestra = input("Digite o nome da palestra: ")
-        while not palestra:
-            print("Erro: O compo nao pode esta vazio.")
-            palestra = input("Digite o nome da palestra: ").strip()
-
-        while True:
-            try:
-                ano = int(input("Digite o ano de nascimento: "))
-                if ano < 1900 or ano > 2025:
-                    print("Digite um ano valido entre 1900 e 2025.")
-                else:
-                    break
-            except ValueError:
-                print("Digite um valor valido.")
-
-            idade = 2025 - ano
+        if valor_str.isdigit():
+            valor = int(valor_str)
         
+        else:
+            print("Entrada invalida. Digite apenas numeros inteiros.")
+            continue
 
-        usuario = {"nome": nome, "palestra": palestra, "idade": idade}
-        lista.append(usuario)
-        print("Usuário cadastrado com sucesso!")
+        if valor < 1:
+            print("Valor invalido. Só aceitamos doação acima de 1kg.")
+        else: 
+            break
 
-    if not lista:
-        print("Nenhum usuario cadastrado.")
+    quilos = [5, 2, 1]
 
-    else: 
-        for usuario in lista:
-            print(f"Nome: {usuario['nome']} | Palestra: {usuario['palestra']} | Idade: {usuario['idade']} ")
-            
+    print(f"Embalando doação de {valor}kg")
 
-cadastro()
+    for quilo in quilos:
+        quantidade = valor // quilo
+        valor = valor % quilo
+        if quantidade > 0:
+            print(f"Sera usado para embalar {quantidade} pacote de {quilo}kg")
+
+    print(f"Obrigada pela doação. Tenha uma otimo dia.")
+    print("---------------------------------------")
+
+doacao()
